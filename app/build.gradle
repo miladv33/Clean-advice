@@ -1,0 +1,113 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.example.takehomeassesmenttestnumber1"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+    hilt {
+        enableTransformForLocalTests = true
+    }
+}
+
+dependencies {
+
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_runtime_version"
+    implementation "androidx.activity:activity-compose:$activity_compose_version"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$test_ext_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+    //hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
+    testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
+    kaptTest "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    //robolectric
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
+
+    // testImplementation for pure JVM unit tests
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$jetbrains_coroutines_test_version"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    // GSON
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit2_version"
+
+    //make test flow easy
+    testImplementation "app.cash.turbine:turbine:$turbine_version"
+    //make test livedata easy
+    testImplementation "com.jraska.livedata:testing-ktx:$jraska_livedata_version"
+
+    //lot better testing assertion than default junit assertion
+    testImplementation "com.google.truth:truth:$google_truth_version"
+
+    // mockito
+    testImplementation "org.mockito:mockito-core:$mockito_core_version"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_android_version"
+    testImplementation("org.mockito:mockito-inline:$mockito_inline_version")
+    androidTestImplementation "androidx.arch.core:core-testing:$androidx_arch_core_testing_version"
+
+    //add observer as state
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_runtime_version"
+
+    //room
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+
+    //work manager
+    implementation "androidx.work:work-runtime-ktx:$workVersion"
+    androidTestImplementation "androidx.work:work-testing:$workVersion"
+
+
+}
